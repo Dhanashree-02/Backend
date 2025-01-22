@@ -6,7 +6,7 @@ const router = express.Router();
 // Routes
 router.post("/students", createStudent);
 router.get ('/students/',getStudents)
-router.put("/student/:id" , updateStudent)
-router.delete("/student/:id" , deleteStudent)
+router.put("/students/:id" , updateStudent)
+router.delete("/students/:id" , deleteStudent)
 
 module.exports = router;
