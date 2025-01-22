@@ -8,7 +8,6 @@ const router = express.Router();
 router.post("/courses", upload.single("image"), createCourse);
 router.get("/courses", getCourses);
 router.put("/courses/:id", upload.single("image"), updateCourse);
-router.delete("/delete/:id", deleteCourse); 
-
+router.delete("/courses/:id", deleteCourse); 
 
 module.exports = router;

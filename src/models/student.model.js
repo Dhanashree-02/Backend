@@ -26,9 +26,7 @@ const studentSchema = new mongoose.Schema({
     access_course_intro: {
         type: String,
     },
-    role: {
-        type: String,
-    },
+
 }, {
     timestamps: true,
 });

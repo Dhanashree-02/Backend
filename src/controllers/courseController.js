@@ -1,7 +1,6 @@
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const fs = require("fs");
 const Course = require("../models/courseModel.js");
-
 // Create Course
 const createCourse = async (req, res) => {
     try {
@@ -9,7 +8,6 @@ const createCourse = async (req, res) => {
         if (!req.file) {
             return res.status(400).json({ message: "Image file is required" });
         }
-
         // Upload image to Cloudinary
         const localFilePath = req.file.path;
         const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
@@ -20,7 +18,6 @@ const createCourse = async (req, res) => {
         if (!cloudinaryResponse) {
             return res.status(500).json({ message: "Failed to upload image to Cloudinary" });
         }
-
         // Create the course, including the Cloudinary image URL
         const course = new Course({
             ...req.body,
@@ -37,7 +34,6 @@ const createCourse = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
-
 // Read Courses
 const getCourses = async (req, res) => {
     try {
@@ -68,7 +64,6 @@ const updateCourse = async (req, res) => {
 
             updatedData = { ...updatedData, image: cloudinaryResponse.url };
         }
-
         // Update the course in the database
         const course = await Course.findByIdAndUpdate(req.params.id, updatedData, {
             new: true, // Return the updated document
@@ -87,10 +82,7 @@ const updateCourse = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
-
-
 // Delete Course
-
 const deleteCourse = async (req, res) => {
     try {
         const course = await Course.findByIdAndDelete(req.params.id);
@@ -104,6 +96,4 @@ const deleteCourse = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
-
 module.exports = { createCourse, getCourses, updateCourse, deleteCourse };
