@@ -12,7 +12,7 @@ const modalSchema = new mongoose.Schema (
         },
         video: {
             type: String,
-            required: true,
+            required: String,
         },
         
     },

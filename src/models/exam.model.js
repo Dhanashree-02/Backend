@@ -3,29 +3,28 @@ const mongoose = require ('mongoose')
 const studentSchema = new mongoose.Schema(
     {
         _id : {
-            type: String,
+        type: String,
         required: true,
         },
-        user_name : {
-            type : String , 
-            require : true
-        },
-        email : {
+        course_id : {
             type: String,
             required: true,
         },
-        pass : {
+        title : {
+            type: String,
+            required: true,  
+        },
+        total_marks : {
             type: String,
             required: true,
         },
-        lec : {
+        pass_marks : {
             type: String,
+            required: true,
         },
-        exam : {
+        duration : {
             type: String,
-        },
-        role : {
-            type: String,
+            required: true,
         }
     },
     {
