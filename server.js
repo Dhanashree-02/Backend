@@ -16,13 +16,13 @@ connectDB()
 app.use (express.json())
 
 
-app.use ('/api/courses' , CourseRoute)
-app.use ('/api/students' , StudentRoute)
-app.use ('/api/instructor' , InstructorRouter)
-app.use ('/api/exam' , ExamRouter)
-app.use ('/api/admin' , AdminRouter)
-app.use ('/api/masteradmin' , masterAdminRouter)
-app.use ('/api/modal' , modalRouter)
+app.use ('/api' , CourseRoute)
+app.use ('/api' , StudentRoute)
+app.use ('/api' , InstructorRouter)
+app.use ('/api' , ExamRouter)
+app.use ('/api' , AdminRouter)
+app.use ('/api' , masterAdminRouter)
+app.use ('/api' , modalRouter)
 
 
 const PORT = process.env.PORT || 3000
