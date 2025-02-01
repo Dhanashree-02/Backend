@@ -1,4 +1,4 @@
-const { v2: cloudinary } = require('cloudinary');
+const { v2: cloudinary } = require("cloudinary");
 const fs = require("fs");
 
 // Configuration
@@ -8,17 +8,31 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
+// Upload Function
 const uploadOnCloudinary = async (localFilePath) => {
     try {
-        if (!localFilePath) return null; // Fixed: `if (!localFilePath)` instead of `if (localFilePath)`
+        if (!localFilePath) {
+            throw new Error("No file path provided for upload.");
+        }
 
         const response = await cloudinary.uploader.upload(localFilePath, { resource_type: "auto" });
-        console.log("File is uploaded on Cloudinary!", response.url);
+        console.log("File successfully uploaded to Cloudinary:", response.url);
+
+        // Delete the file after successful upload
+        fs.unlink(localFilePath, (err) => {
+            if (err) console.error("Error deleting local file:", err.message);
+        });
+
         return response;
     } catch (error) {
-        fs.unlinkSync(localFilePath);
-        return null;
-    }
-};
+        console.error("Error uploading to Cloudinary:", error.message);
 
+        // Delete the file if upload fails
+        fs.unlink(localFilePath, (err) => {
+            if (err) console.error("Error deleting local file after failure:", err.message);
+        });
+
+        throw error; // Rethrow the error for the calling function to handle
+    }
+};                                                                                                                      
 module.exports = { uploadOnCloudinary };

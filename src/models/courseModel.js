@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const courseSchema = new mongoose.Schema({
   image: {
     type: String,
@@ -35,10 +34,8 @@ const courseSchema = new mongoose.Schema({
   exam: {
     type: String,
   },
-  
 },
 {
   timestamps: true
 });
-
 module.exports = mongoose.model('Course', courseSchema);
